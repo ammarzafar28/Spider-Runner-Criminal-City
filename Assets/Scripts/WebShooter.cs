@@ -22,7 +22,7 @@ public class WebShooter : MonoBehaviour
     void Update()
     {
         if(Input.GetMouseButton(0) && coolDownTimer > attackCooldown && PlayerMovement.Attack()) {
-            Attack();
+            //Attack();
 
             coolDownTimer += Time.deltaTime;
         }
@@ -31,7 +31,7 @@ public class WebShooter : MonoBehaviour
 
     public void Attack()
     {
-        anim.SetTrigger("attack");
+        //anim.SetTrigger("attack");
         coolDownTimer = 0;
 
         webs[findWeb()].transform.position = webPoint.position;
