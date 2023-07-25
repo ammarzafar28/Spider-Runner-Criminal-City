@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GreenGoblin : MonoBehaviour
 {
@@ -12,6 +13,16 @@ public class GreenGoblin : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     private float coolDownTimer = Mathf.Infinity;
 
+    public int maxHealth = 100;
+    private int currentHealth;
+
+    public string newSceneName = "DocOckScene-2";
+
+    private void Start() 
+    {
+        currentHealth = maxHealth;
+    }
+
     private void Update() 
     {
         coolDownTimer += Time.deltaTime;
@@ -21,7 +32,22 @@ public class GreenGoblin : MonoBehaviour
             // attack
             }
         }
+    }
 
+    public void TakeDamage(int damage) 
+    {
+        currentHealth -= damage;
+
+        if(currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    private void Die() 
+    {
+        Destroy(gameObject);
+
+        SceneManager.LoadScene(newSceneName);
         
     }
 

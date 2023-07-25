@@ -7,6 +7,18 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]private float speed;
     private float horizontalInput;
+    public int damangeAmount = 50;
+
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if(collision.gameObject.CompareTag("Enemy")) {
+            GreenGoblin enemy = collision.gameObject.GetComponent<GreenGoblin>();
+            if(enemy != null) {
+                enemy.TakeDamage(damangeAmount);
+            }
+           
+        }
+    }
 
     void Awake() 
     {
