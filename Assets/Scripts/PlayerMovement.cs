@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private float speed;
     private float horizontalInput;
     public int damangeAmount = 50;
+    private float jump = 500;
 
     private void OnCollisionEnter2D(Collision2D collision) 
     {
@@ -24,12 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+ 
     // Update is called once per frame
     void Update()
     {
@@ -43,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        if(Input.GetKey(KeyCode.Space)) {
-            rb.velocity = new Vector2(rb.velocity.x, speed);
+        if(Input.GetButtonDown("Jump")) {
+            rb.AddForce(new Vector2(rb.velocity.x, jump));
         }
     }
 
