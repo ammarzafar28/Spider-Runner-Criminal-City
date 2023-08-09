@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float webSpeed = 10f; 
     public GameObject webPrefab;
-    public float jumpStrength = 30f;
+    public float jumpStrength = 20f;
 
     void Awake() 
     {
