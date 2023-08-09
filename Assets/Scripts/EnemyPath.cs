@@ -22,17 +22,19 @@ public class EnemyPath : MonoBehaviour
 
     private void Update() 
     {
-        if(movingLeft) {
-            if(enemy.position.x >= leftEdge.position.x) {
-                MoveInDirection(-1);
+        if (enemy != null && leftEdge != null && rightEdge != null) {
+            if(movingLeft) {
+                if(enemy.position.x >= leftEdge.position.x) {
+                    MoveInDirection(-1);
+                } else {
+                    DirectionChange();
+                }
             } else {
-                DirectionChange();
-            }
-        } else {
-            if(enemy.position.x <= rightEdge.position.x) {
-                MoveInDirection(1);
-            } else {
-                DirectionChange();
+                if(enemy.position.x <= rightEdge.position.x) {
+                    MoveInDirection(1);
+                } else {
+                    DirectionChange();
+                }
             }
         }
     }

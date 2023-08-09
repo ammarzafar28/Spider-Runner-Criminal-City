@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GreenGoblin : MonoBehaviour
+public class Lizard : MonoBehaviour
 {
     [SerializeField] private float attackCooldown;
     [SerializeField] private int damage;
@@ -16,7 +16,7 @@ public class GreenGoblin : MonoBehaviour
     public int maxHealth = 50;
     private int currentHealth;
 
-    public string newSceneName = "DocOckScene-2";
+    public string newSceneName = "RhinoScene-5";
 
     private void Start() 
     {
@@ -34,6 +34,7 @@ public class GreenGoblin : MonoBehaviour
         }
     }
 
+    
     public void TakeDamage(int damage) 
     {
         currentHealth -= damage;
@@ -50,6 +51,7 @@ public class GreenGoblin : MonoBehaviour
         SceneManager.LoadScene(newSceneName);
         
     }
+    
 
     private bool PlayerInSight() 
     {

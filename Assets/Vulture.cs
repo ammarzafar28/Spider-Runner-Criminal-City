@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GreenGoblin : MonoBehaviour
+public class Vulture : MonoBehaviour
 {
     [SerializeField] private float attackCooldown;
     [SerializeField] private int damage;
@@ -13,10 +13,10 @@ public class GreenGoblin : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     private float coolDownTimer = Mathf.Infinity;
 
-    public int maxHealth = 50;
+    public int maxHealth = 100;
     private int currentHealth;
 
-    public string newSceneName = "DocOckScene-2";
+    public string newSceneName = "LizardScene-4";
 
     private void Start() 
     {
