@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private GreenGoblin takeDamage;
     private Rigidbody2D rb;
+    private BoxCollider2D bc;
     [SerializeField]private float speed;
     private float horizontalInput;
     private float jump = 500;
@@ -13,11 +14,16 @@ public class PlayerMovement : MonoBehaviour
     public float webSpeed = 10f; 
     public GameObject webPrefab;
     public float jumpStrength = 20f;
+    private bool shoot = true;
+    public float webCooldownTime = 1f;
+
+    [SerializeField] private LayerMask jumpingGround;
 
     void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
         takeDamage = GetComponent<GreenGoblin>();
+        bc = GetComponent<BoxCollider2D>();
     }
  
     // Update is called once per frame
@@ -33,13 +39,29 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        if(Input.GetButtonDown("Jump")) {
+        if(Input.GetButtonDown("Jump") && IsGrounded()) {
             rb.AddForce(new Vector2(rb.velocity.x, jump));
         }
-
-        if (Input.GetMouseButtonDown(0)) {
-            ShootWeb();
+        
+        if(!shoot) {
+            webCooldownTime -= Time.deltaTime;
+            if(webCooldownTime <= 0) {
+                shoot = true;
+                webCooldownTime = 1f;
+            }
         }
+
+        if (Input.GetMouseButtonDown(0) && shoot) {
+            ShootWeb();
+            shoot = false;
+        }
+    }
+
+
+    private bool IsGrounded()
+    {
+        return Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .1f, jumpingGround);
+
     }
 
    private void OnCollisionEnter2D(Collision2D collision)
@@ -57,11 +79,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsJumpingOnHead(Collision2D collision)
     {
-        // Calculate the position of Spiderman's feet and enemy's center
-        Vector2 spidermanFeet = new Vector2(transform.position.x, transform.position.y - 0.5f); // Adjust offset as needed
+        Vector2 spidermanFeet = new Vector2(transform.position.x, transform.position.y - 0.5f); 
         Vector2 enemyCenter = collision.gameObject.transform.position;
 
-        // Check if Spiderman's feet are above the enemy's center
         return spidermanFeet.y >= enemyCenter.y;
     }
 

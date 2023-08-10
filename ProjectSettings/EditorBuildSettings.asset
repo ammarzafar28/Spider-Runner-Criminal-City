@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VenomScene-5.unity
     guid: bfaa3c041d6a15540b66ebeef3d99ad0
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: f458922dcb68e5b4999bd1f54f4aa9cb
   m_configObjects: {}
