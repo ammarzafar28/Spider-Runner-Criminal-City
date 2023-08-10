@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GreenGoblin : MonoBehaviour
 {
-    [SerializeField] private float attackCooldown;
     [SerializeField] private int damage;
     [SerializeField] private float range;
 
@@ -26,12 +25,6 @@ public class GreenGoblin : MonoBehaviour
     private void Update() 
     {
         coolDownTimer += Time.deltaTime;
-
-        if (PlayerInSight()) {
-            if(coolDownTimer >= attackCooldown) {
-            // attack
-            }
-        }
     }
 
     public void TakeDamage(int damage) 

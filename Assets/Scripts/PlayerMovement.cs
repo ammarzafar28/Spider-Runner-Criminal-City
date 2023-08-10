@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private GreenGoblin takeDamage;
     private Rigidbody2D rb;
     private BoxCollider2D bc;
-    [SerializeField]private float speed;
+
+    [SerializeField] private float speed;
     private float horizontalInput;
     private float jump = 500;
 
@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
-        takeDamage = GetComponent<GreenGoblin>();
         bc = GetComponent<BoxCollider2D>();
     }
  
@@ -57,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .1f, jumpingGround);
@@ -66,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && IsJumpingOnHead(collision))
+        if (collision.gameObject.CompareTag("Enemy") && JumpingOnHead(collision))
         {
             EnemyHealth health = collision.gameObject.GetComponent<EnemyHealth>();
             if (health != null)
@@ -77,12 +75,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsJumpingOnHead(Collision2D collision)
+    private bool JumpingOnHead(Collision2D collision)
     {
-        Vector2 spidermanFeet = new Vector2(transform.position.x, transform.position.y - 0.5f); 
+        Vector2 Feet = new Vector2(transform.position.x, transform.position.y - 0.5f); 
         Vector2 enemyCenter = collision.gameObject.transform.position;
 
-        return spidermanFeet.y >= enemyCenter.y;
+        return Feet.y >= enemyCenter.y;
     }
 
     void ShootWeb()

@@ -6,7 +6,7 @@ public class CarnageWeb : MonoBehaviour
 {
     public GameObject webC;
     public Transform webDrop;
-    public float dropInterval = 1f; // Time interval between bomb drops
+    public float dropTime = 1f; // Time interval between bomb drops
 
     public int carnageWebDamage = 10;
 
@@ -31,7 +31,7 @@ public class CarnageWeb : MonoBehaviour
     IEnumerator shootCarnageWebs()
     {
         while (true) {
-            yield return new WaitForSeconds(dropInterval);
+            yield return new WaitForSeconds(dropTime);
             CarnageBomb();
         }
     }

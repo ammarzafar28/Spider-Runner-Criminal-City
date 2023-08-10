@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class DocOck : MonoBehaviour
 {
-    [SerializeField] private float attackCooldown;
     [SerializeField] private int damage;
     [SerializeField] private float range;
 
@@ -27,18 +26,11 @@ public class DocOck : MonoBehaviour
     private void Update() 
     {
         coolDownTimer += Time.deltaTime;
-
-        if (PlayerInSight()) {
-            if(coolDownTimer >= attackCooldown) {
-            // attack
-            }
-        }
     }
 
     public void TakeDamage(int damage) 
     {
         currentHealth -= damage;
-
         if(currentHealth <= 0) {
             Die();
         }
@@ -47,9 +39,7 @@ public class DocOck : MonoBehaviour
     private void Die() 
     {
         Destroy(gameObject);
-
         SceneManager.LoadScene(newSceneName);
-        
     }
 
     private bool PlayerInSight() 
